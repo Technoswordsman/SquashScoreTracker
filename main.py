@@ -3,6 +3,12 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
 import time
+import sys
+import os
+
+# Add the current directory to the Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from utils.pdf_generator import generate_scorecard
 from utils.match_utils import calculate_statistics
 from models.database import get_db, Match, Score
