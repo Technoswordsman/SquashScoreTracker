@@ -5,14 +5,28 @@ from datetime import datetime, timedelta
 import time
 import sys
 import os
+import importlib.util
 
-# Get the current directory and add it to the Python path
+# Helper function to import modules from specific file paths
+def import_module_from_path(module_name, file_path):
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    if spec is None:
+        raise ImportError(f"Could not load spec for module {module_name} from {file_path}")
+    
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+# Import modules using absolute file paths
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
+pdf_generator = import_module_from_path("pdf_generator", os.path.join(current_dir, "utils", "pdf_generator.py"))
+match_utils = import_module_from_path("match_utils", os.path.join(current_dir, "utils", "match_utils.py"))
 
-# Import the modules directly
-from utils.pdf_generator import generate_scorecard
-from utils.match_utils import calculate_statistics
+# Use the imported modules
+generate_scorecard = pdf_generator.generate_scorecard
+calculate_statistics = match_utils.calculate_statistics
+
+# Import database directly since it's less problematic
 from models.database import get_db, Match, Score
 from sqlalchemy.orm import Session
 
