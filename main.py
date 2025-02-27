@@ -9,9 +9,14 @@ import os
 # Add the current directory to the Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from utils.pdf_generator import generate_scorecard
-from utils.match_utils import calculate_statistics
+# Use absolute imports instead of relative imports
+import utils.pdf_generator
+import utils.match_utils
 from models.database import get_db, Match, Score
+
+# Create aliases for the imported functions
+generate_scorecard = utils.pdf_generator.generate_scorecard
+calculate_statistics = utils.match_utils.calculate_statistics
 from sqlalchemy.orm import Session
 
 # Page configuration
