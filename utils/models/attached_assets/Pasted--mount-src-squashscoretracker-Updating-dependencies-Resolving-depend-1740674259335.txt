@@ -1,0 +1,119 @@
+/mount/src/squashscoretracker /mount/src/squashscoretracker
+
+Updating dependencies
+
+Resolving dependencies...
+
+
+Package operations: 46 installs, [2025-02-27 16:36:39.570675] 0 updates, 0 removals
+
+
+  - Installing attrs (25.1.0)
+
+  - Installing rpds-py (0.23.1)
+
+  - Installing typing-extensions (4.12.2)
+
+  - Installing referencing (0.36.2)
+
+  - Installing jsonschema-specifications (2024.10.1)
+
+  - Installing markupsafe (3.0.2)
+
+  - Installing mdurl (0.1.2)
+
+  - Installing six (1.17.0)
+
+  - Installing smmap (5.0.2)
+
+  - Installing certifi (2025.1.31)
+
+  - Installing charset-normalizer (3.4.1)
+
+  - Installing gitdb (4.0.12)
+
+  - Installing idna (3.10)
+
+  - Installing jinja2 (3.1.5)
+
+  - Installing markdown-it-py (3.0.0)
+
+  - Installing narwhals (1.28.0)
+
+  - Installing numpy (2.2.3)
+
+  - Installing pygments (2.19.1)
+
+  - Installing jsonschema (4.23.0)
+
+  - Installing pytz (2025.1)
+
+  - Installing urllib3 (2.3.0)
+
+  - Installing python-dateutil (2.9.0.post0)
+
+  - Installing packaging (24.2)
+
+  - Installing tzdata (2025.1)
+
+  - Installing altair (5.5.0)
+
+  - Installing blinker (1.9.0)
+
+  - Installing cachetools (5.5.2)
+
+  - Installing click (8.1.8)
+
+  - Installing chardet (5.2.0)
+
+  - Installing gitpython (3.1.44)
+
+  - Installing greenlet (3.1.1)
+
+  - Installing pandas (2.2.3)
+
+  - Installing pillow (11.1.0)
+
+  - Installing protobuf (5.29.3)
+
+  - Installing pyarrow (19.0.1)
+
+  - Installing pydeck (0.9.1)
+
+  - Installing requests (2.32.3)
+
+  - Installing rich (13.9.4)
+
+  - Installing tenacity (9.0.0)
+
+  - Installing toml (0.10.2)
+
+  - Installing tornado (6.4.2)
+
+  - Installing watchdog (6.0.0)
+
+  - Installing psycopg2-binary (2.9.10)
+
+  - Installing reportlab (4.3.1)
+
+  - Installing sqlalchemy (2.0.38)
+
+  - Installing streamlit (1.42.2)
+
+
+Writing lock file
+
+
+Installing the current project: repl-nix-workspace (0.1.0)[2025-02-27 16:36:47.932497] 
+
+
+Error: The current project could not be installed: No file/folder found for package repl-nix-workspace
+
+If you do not want to install the current project use --no-root.
+
+If you want to use Poetry only for dependency management but not for packaging, you can disable package mode by setting package-mode = false in your pyproject.toml file.
+
+If you did intend to install the current project, you may need to set `packages` in your pyproject.toml file.
+
+
+/mount/src/squashscoretracker
