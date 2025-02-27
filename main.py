@@ -20,9 +20,10 @@ if current_dir not in sys.path:
 
 # Import locally with direct file imports
 try:
-    # Import from packages directly
-    from utils import generate_scorecard, calculate_statistics
-    from models import get_db, Match, Score
+    # Use explicit imports that don't rely on package structure
+    from utils.pdf_generator import generate_scorecard
+    from utils.match_utils import calculate_statistics
+    from models.database import get_db, Match, Score
     
     st.success("Modules imported successfully")
 except ImportError as e:
