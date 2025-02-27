@@ -11,14 +11,21 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
-# Direct imports
+import sys
+import streamlit as st
+
+# Add absolute imports directly
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
+# Import locally with direct file imports
 try:
     from utils.pdf_generator import generate_scorecard
     from utils.match_utils import calculate_statistics
+    from models.database import get_db, Match, Score
 except ImportError as e:
     st.error(f"Import error: {e}")
     
-    # Fallback definitions if imports fail
+    # Define fallbacks for missing functions
     def generate_scorecard(*args, **kwargs):
         return b"PDF generation failed due to import error"
         
@@ -28,9 +35,43 @@ except ImportError as e:
             'games_played': 0,
             'longest_rally': 0
         }
-
-# Import database directly since it's less problematic
-from models.database import get_db, Match, Score
+    
+    # Create dummy database classes and function
+    try:
+        from sqlalchemy.ext.declarative import declarative_base
+        from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
+        Base = declarative_base()
+        
+        class Match(Base):
+            __tablename__ = "matches"
+            id = Column(Integer, primary_key=True)
+            player1_name = Column(String)
+            player2_name = Column(String)
+            start_time = Column(DateTime)
+            duration = Column(String)
+        
+        class Score(Base):
+            __tablename__ = "scores"
+            id = Column(Integer, primary_key=True)
+            match_id = Column(Integer, ForeignKey("matches.id"))
+            game = Column(Integer)
+            player1_score = Column(Integer)
+            player2_score = Column(Integer)
+            timestamp = Column(DateTime)
+        
+        def get_db():
+            yield None
+    except:
+        st.error("Failed to create database fallbacks")
+        
+        class Match:
+            pass
+        
+        class Score:
+            pass
+            
+        def get_db():
+            yield None
 from sqlalchemy.orm import Session
 
 # Page configuration
