@@ -4,8 +4,13 @@ from sqlalchemy.orm import sessionmaker, relationship
 import os
 from datetime import datetime
 
-# Get database URL from environment
+# Get database URL from environment or use SQLite as fallback
 DATABASE_URL = os.getenv('DATABASE_URL')
+
+if not DATABASE_URL:
+    # Fallback to SQLite for development
+    DATABASE_URL = 'sqlite:///squash_scorecard.db'
+    print("No DATABASE_URL found, using SQLite database")
 
 # Create database engine with proper SSL settings
 engine = create_engine(
