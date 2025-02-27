@@ -100,8 +100,9 @@ st.title("Squash Scorecard")
 # Database session
 try:
     db = next(get_db())
+    st.success("Database connected successfully")
 except Exception as e:
-    st.error(f"Database connection error. Please try again.")
+    st.error(f"Database connection error: {str(e)}")
     db = None
 
 def check_game_end():
