@@ -5,26 +5,29 @@ from datetime import datetime, timedelta
 import time
 import sys
 import os
-import importlib.util
 
-# Helper function to import modules from specific file paths
-def import_module_from_path(module_name, file_path):
-    spec = importlib.util.spec_from_file_location(module_name, file_path)
-    if spec is None:
-        raise ImportError(f"Could not load spec for module {module_name} from {file_path}")
-    
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-# Import modules using absolute file paths
+# Add the project root to Python path to ensure imports work
 current_dir = os.path.dirname(os.path.abspath(__file__))
-pdf_generator = import_module_from_path("pdf_generator", os.path.join(current_dir, "utils", "pdf_generator.py"))
-match_utils = import_module_from_path("match_utils", os.path.join(current_dir, "utils", "match_utils.py"))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
 
-# Use the imported modules
-generate_scorecard = pdf_generator.generate_scorecard
-calculate_statistics = match_utils.calculate_statistics
+# Direct imports
+try:
+    from utils.pdf_generator import generate_scorecard
+    from utils.match_utils import calculate_statistics
+except ImportError as e:
+    st.error(f"Import error: {e}")
+    
+    # Fallback definitions if imports fail
+    def generate_scorecard(*args, **kwargs):
+        return b"PDF generation failed due to import error"
+        
+    def calculate_statistics(*args, **kwargs):
+        return {
+            'total_points': 0,
+            'games_played': 0,
+            'longest_rally': 0
+        }
 
 # Import database directly since it's less problematic
 from models.database import get_db, Match, Score
