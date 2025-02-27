@@ -22,12 +22,12 @@ if current_dir not in sys.path:
 try:
     # Use explicit imports that don't rely on package structure
     from utils.pdf_generator import generate_scorecard
-    from utils.match_utils import calculate_statistics
-    from models.database import get_db, Match, Score
-    
-    st.success("Modules imported successfully")
-except ImportError as e:
-    st.error(f"Import error: {e}")
+        from utils.match_utils import calculate_statistics
+        from models.database import get_db, Match, Score
+
+        st.success("Modules imported successfully")
+    except ImportError as e:
+        st.error(f"Import error: {e}")
     
     # Define fallbacks for missing functions
     def generate_scorecard(*args, **kwargs):
