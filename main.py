@@ -1,21 +1,22 @@
 
+import os
+import sys
+import time
+from datetime import datetime, timedelta
+
 import streamlit as st
 import pandas as pd
-from datetime import datetime, timedelta
-import time
-import sys
-import os
 
-# Add the project root to Python path to ensure imports work
+# Page configuration must be the first Streamlit command
+st.set_page_config(
+    page_title="Squash Scorecard",
+    layout="wide"
+)
+
+# Add the project root to Python path to ensure imports work correctly
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
-
-import sys
-import streamlit as st
-
-# Add absolute imports directly
-sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 # Import locally with direct file imports
 try:
@@ -72,13 +73,11 @@ except ImportError as e:
             
         def get_db():
             yield None
+
 from sqlalchemy.orm import Session
 
-# Page configuration
-st.set_page_config(
-    page_title="Squash Scorecard",
-    layout="wide"
-)
+# Title and Header
+st.title("Squash Scorecard")
 
 # Initialize session state variables
 def init_session_state():
@@ -134,9 +133,6 @@ def init_session_state():
         st.session_state.last_game_winner = None
 
 init_session_state()
-
-# Title and Header
-st.title("Squash Scorecard")
 
 # Database session
 try:
